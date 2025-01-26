@@ -1,10 +1,30 @@
- import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import gsap from 'gsap';
+// import { SplitText } from 'gsap/SplitText';
+import { useRef, useEffect } from 'react';
+// gsap.registerPlugin(SplitText) 
 
  const Card = ({ user }) => {
+    const textRef = useRef(null);
+    useEffect(() => {
+        // let typeSplit = new SplitText(textRef.current, {
+        //     types: 'lines, words, chars',
+        //     tagName: 'span'
+        // })
+
+        gsap.to('.anim', {
+            x: '10%',
+            opacity: 1,
+            duration: 1,
+            ease: 'power1.out',
+            stagger: 0.1,
+        })
+
+    }, [])
    return (
-     <div className="card-box rounded-xl">
-         <div className=" shadow p-2">
-             <div className="flex flex-row justify-start gap-2">
+     <div ref={textRef} className="card-box rounded-xl anim opacity-0">
+         <div className="p-2">
+             <div className="flex flex-row justify-start gap-2  ">
                  <div className="self-start">
                      <p>{user.id}</p>
                  </div>
