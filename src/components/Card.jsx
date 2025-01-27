@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 import { useRef, useEffect, useState } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 import EditUser from './EditUserPopUp';
 import { TailSpin } from 'react-loader-spinner';
 
  const Card = ({ user, handleDelete }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, ] = useState(false);
 
     const textRef = useRef(null);
     useEffect(() => {
@@ -80,7 +78,8 @@ import { TailSpin } from 'react-loader-spinner';
  }
 
 
- // prototyping the incoming object user
+ // prototyping the incoming object user, also handling prop validation error
+
  Card.propTypes = {
    user: PropTypes.shape({
      id: PropTypes.number.isRequired,
@@ -91,5 +90,9 @@ import { TailSpin } from 'react-loader-spinner';
      }).isRequired
    }).isRequired
  }; 
+
+ Card.propTypes = {
+  handleDelete: PropTypes.func.isRequired
+ }
 
  export default Card
