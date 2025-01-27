@@ -1,8 +1,19 @@
-# React + Vite
+# User Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Setup Instruction
 
-Currently, two official plugins are available:
+* Clone the repo using `git clone https://github.com/kungumasakthivel/User-Management-Dashboard.git`
+* Change the direactory, to cloned folder
+* Then install `node_modules` folder using `npm install`
+* Run the application using `npm run dev`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repo has two branch `main` and `v2`
+
+* The difference is the  `main` branch makes delete user with help of calling delete API, due to some internal constrain update in server won't reflect in UI
+* But in `v2` branch, users details can be deleted temporarily via **filter** method and re-rendering the UI to see the changes.
+  * Changes are not reflected in server, but it reflects in UI temporarily.
+
+Hosted Link
+
+* `v2` branch [https://sakthivel-umd-v2.netlify.app/](https://sakthivel-umd-v2.netlify.app/)
+* `main` branch [https://sakthivel-umd.netlify.app/](https://sakthivel-umd.netlify.app/)
