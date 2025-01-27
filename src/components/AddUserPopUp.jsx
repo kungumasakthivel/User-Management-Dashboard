@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { TailSpin } from "react-loader-spinner";
 import { toast } from 'react-toastify';
+import { validateEmail } from "./function/validateMail";
 
 const AddUser = () => {
     const [name, setName] = useState('')
@@ -9,11 +10,7 @@ const AddUser = () => {
     const [company, setCompany] = useState('')
     const [loading, setLoading] = useState(false);
 
-    const validateEmail = (email) => {
-        email = email.trim();
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    };
+    
 
     const handleSubmit = async () => {
 
@@ -27,7 +24,7 @@ const AddUser = () => {
             return toast.error('Please enter your company!');
         }
         setLoading(true);
-        const postData = {
+        const postData = {         // storing all user data in one object for post method
             name: name.trim(),
             email: email.trim(),
             company: company.trim()
@@ -37,16 +34,18 @@ const AddUser = () => {
             setLoading(false)
             console.log(res)
             if(res.status === 200 || res.status === 201) {
-                toast.success('User added successfully!')
-                
+                toast.success('User added successfully!')   // calling success notification           
             }
         } catch (err) {
-            toast.error('Error: ' + err)
+            toast.error('Error: ' + err)   // calling error notification 
         }
     }
   return (
     <div className='flex flex-col items-center justify-center h-80'>
-        {loading ? <div className="loader" ><TailSpin height="25" width="35" color="red" /></div>: null}
+        {loading ? 
+            <div className="loader" ><TailSpin height="25" width="35" color="red" /></div>   // spinning loader
+            : null
+        }
         <h1 className="text-2xl font-semibold mb-3">NEW USER</h1>
         <input 
          value={name}

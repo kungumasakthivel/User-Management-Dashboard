@@ -20,14 +20,14 @@ import { TailSpin } from 'react-loader-spinner';
             duration: 1,
             ease: 'power1.out',
             stagger: 0.1,
-        })
+        }) // adding sliding animation for card's 
 
     }, [])
 
     const handleDelete = async (id) => {
       try {
         setLoading(true)
-        const res = await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+        const res = await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);  // API call for deleting user
         setLoading(false)
         if(res.status === 200) {
           toast.success('Successfully deleted user with ID ' + id)
@@ -41,7 +41,7 @@ import { TailSpin } from 'react-loader-spinner';
      <div ref={textRef} className="card-box rounded-xl anim opacity-0">
          <div className="p-2">
             {loading ? <div className="del-loader" ><TailSpin height="20" width="25" color="red" /></div>: null}
-             <div className="flex flex-row justify-start gap-2  ">
+             <div className="flex flex-row justify-start gap-2 mb-3">
                  <div className="self-start text-lg">
                      <p>{user.id}</p>
                  </div>
@@ -91,6 +91,8 @@ import { TailSpin } from 'react-loader-spinner';
    )
  }
 
+
+ // prototyping the incoming object user
  Card.propTypes = {
    user: PropTypes.shape({
      id: PropTypes.number.isRequired,
@@ -100,6 +102,6 @@ import { TailSpin } from 'react-loader-spinner';
        name: PropTypes.string.isRequired
      }).isRequired
    }).isRequired
- };
+ }; 
 
  export default Card

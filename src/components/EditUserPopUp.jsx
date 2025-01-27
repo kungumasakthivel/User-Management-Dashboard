@@ -3,6 +3,7 @@ import { useState } from "react"
 import { toast } from "react-toastify"
 import PropTypes from 'prop-types';
 import { TailSpin } from "react-loader-spinner";
+import { validateEmail } from "./function/validateMail";
 
 const EditUser = ({ user }) => {
     const [name, setName] = useState(user.name)
@@ -10,11 +11,6 @@ const EditUser = ({ user }) => {
     const [company, setCompany] = useState(user.company.name)
     const [loading, setLoading] = useState(false);
 
-    const validateEmail = (email) => {
-        email = email.trim();
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    };
 
     const handleEdit = async ({ id }) => {
         console.log(id)
@@ -81,6 +77,7 @@ const EditUser = ({ user }) => {
     )
 }
 
+// prototyping the incoming object user
 EditUser.propTypes = {
     user: PropTypes.shape({
         id: PropTypes.number.isRequired,
