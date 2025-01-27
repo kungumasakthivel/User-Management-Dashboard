@@ -3,6 +3,8 @@ import gsap from 'gsap';
 // import { SplitText } from 'gsap/SplitText';
 import { useRef, useEffect } from 'react';
 // gsap.registerPlugin(SplitText) 
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
  const Card = ({ user }) => {
     const textRef = useRef(null);
@@ -21,14 +23,26 @@ import { useRef, useEffect } from 'react';
         })
 
     }, [])
+
+    const handleDelete = async (id) => {
+      try {
+      const res = await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+      if(res.status === 200) {
+        toast.success('Successfully deleted user with ID ' + id)
+      }
+    } catch (err) {
+      toast.error('Error in deleting user! ' + err)
+    }
+    }
+
    return (
      <div ref={textRef} className="card-box rounded-xl anim opacity-0">
          <div className="p-2">
              <div className="flex flex-row justify-start gap-2  ">
-                 <div className="self-start">
+                 <div className="self-start text-lg">
                      <p>{user.id}</p>
                  </div>
-                 <div className="text-left">
+                 <div className="text-left text-lg">
                      <p>Name: {user.name}</p>
                      <p>Email: {user.email}</p>
                      <p>Company: {user.company.name}</p>
@@ -36,13 +50,13 @@ import { useRef, useEffect } from 'react';
              </div>
              <div className='btn-container flex flex-row justify-between items-center'>
                 <button 
-                  className='mx-2 my-1 px-2 py-1 border-2 border-cyan-50 rounded-xl cursor-pointer'
-                  onClick={}
+                  className='mx-2 my-1 px-2 py-1 border-2 border-cyan-50 rounded-xl del-btn'
+                  onClick={() => handleDelete(user.id)}
                 >
                   Delete
                 </button>
                 <button 
-                  className='mx-2 my-1 px-2 py-1 border-2 border-cyan-50 rounded-xl cursor-pointer'
+                  className='mx-2 my-1 px-2 py-1 border-2 border-cyan-50 rounded-xl edit-btn'
                 >
                   Edit
                 </button>

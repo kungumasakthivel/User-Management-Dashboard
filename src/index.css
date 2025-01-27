@@ -77,6 +77,24 @@
   }
 }
 
+.edit-btn:hover {
+  color: black;
+  font-weight: 700;
+  background: yellow;
+  border-color: yellow;
+  transition: 10ms;
+  cursor: pointer;
+}
+
+.del-btn:hover {
+  color: white;
+  font-weight: 500;
+  background: red;
+  border-color: red;
+  transition: 10ms;
+  cursor: pointer;
+}
+
 /* small screen  */
 @media screen and (max-width: 768px) {
   .anim {
