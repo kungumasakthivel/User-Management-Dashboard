@@ -34,6 +34,19 @@ import { useRef, useEffect } from 'react';
                      <p>Company: {user.company.name}</p>
                  </div>
              </div>
+             <div className='btn-container flex flex-row justify-between items-center'>
+                <button 
+                  className='mx-2 my-1 px-2 py-1 border-2 border-cyan-50 rounded-xl cursor-pointer'
+                  onClick={}
+                >
+                  Delete
+                </button>
+                <button 
+                  className='mx-2 my-1 px-2 py-1 border-2 border-cyan-50 rounded-xl cursor-pointer'
+                >
+                  Edit
+                </button>
+             </div>
          </div>
      </div>
    )
