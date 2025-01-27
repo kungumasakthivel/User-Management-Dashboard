@@ -67,7 +67,7 @@ const ListUsers = () => {
           }}
         >
           <AddUser setIsOpen={isOpen}/>
-          <button onClick={() => setIsOpen(false)}>Close</button>
+          <button className='cursor-pointer' onClick={() => setIsOpen(false)}>Close</button>
         </Modal>
         <ToastContainer />
     </div>

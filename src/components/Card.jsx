@@ -1,12 +1,16 @@
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 // import { SplitText } from 'gsap/SplitText';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 // gsap.registerPlugin(SplitText) 
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Modal from 'react-modal';
+import EditUser from './EditUser';
 
  const Card = ({ user }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     const textRef = useRef(null);
     useEffect(() => {
         // let typeSplit = new SplitText(textRef.current, {
@@ -57,9 +61,31 @@ import { toast } from 'react-toastify';
                 </button>
                 <button 
                   className='mx-2 my-1 px-2 py-1 border-2 border-cyan-50 rounded-xl edit-btn'
+                  onClick={() => setIsOpen(true)}
                 >
                   Edit
                 </button>
+                <Modal
+                  isOpen={isOpen}
+                  onRequestClose={() => setIsOpen(false)}
+                  style={{
+                    content: {
+                      top: '50%',
+                      left: '50%',
+                      right: 'auto',
+                      bottom: 'auto',
+                      marginRight: '-50%',
+                      minWidth: 'auto',
+                      minHeight: '50vh',
+                      transform: 'translate(-50%, -50%)',
+                      borderRadius: '25px',
+                      backgroundImage: 'linear-gradient(135deg, #071952 10%, #088395 180%)'
+                    },
+                  }}
+                >
+                  <EditUser user={user}/>
+                  <button className='cursor-pointer' onClick={() => setIsOpen(false)}>Close</button>
+                </Modal>
              </div>
          </div>
      </div>

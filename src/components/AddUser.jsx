@@ -2,11 +2,10 @@ import axios from "axios"
 import { useState } from "react"
 import { toast } from 'react-toastify';
 
-const AddUser = ({setIsOpen}) => {
+const AddUser = ({ setIsOpen }) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [company, setCompany] = useState('')
-    const [response, setResponse] = useState('');
 
     const validateEmail = (email) => {
         email = email.trim();
@@ -15,7 +14,7 @@ const AddUser = ({setIsOpen}) => {
     };
 
     const handleSubmit = async () => {
-        
+
         if(name.trim().length <= 0) {
             return toast.error('Please enter your name!');
         }
@@ -35,11 +34,10 @@ const AddUser = ({setIsOpen}) => {
             console.log(res)
             if(res.status === 200 || res.status === 201) {
                 toast.success('User added successfully!')
-                setResponse(`User added successfully`)
                 setIsOpen(false)
             }
         } catch (err) {
-            setResponse('Failed to add user: ' + err)
+            toast.error('Error: ' + err)
         }
     }
   return (
