@@ -65,7 +65,7 @@ const AddUser = () => {
          placeholder='Company' 
         />
         <button 
-         className="btn px-4 py-2 font-medium text-sm border-2 rounded-3xl mt-6 cursor-pointer"
+         className="btn px-4 py-2 font-medium text-sm border-2 rounded-3xl mt-6 cursor-pointer add-user-btn"
          onClick={handleSubmit}
         >
             Add User

@@ -95,6 +95,16 @@
   cursor: pointer;
 }
 
+.add-user-btn:hover, .edit-save-btn:hover {
+  background: linear-gradient(135deg, white,  greenyellow, white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-color: greenyellow;
+}
+
 /* small screen  */
 @media screen and (max-width: 768px) {
   .anim {

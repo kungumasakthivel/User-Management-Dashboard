@@ -66,7 +66,7 @@ const EditUser = ({ user }) => {
              placeholder='Company' 
             />
             <button 
-             className="btn px-4 py-2 font-medium text-sm border-2 rounded-3xl mt-6 cursor-pointer"
+             className="btn px-4 py-2 font-medium text-sm border-2 rounded-3xl mt-6 cursor-pointer edit-save-btn"
              onClick={() => handleEdit(user.id)}
             >
                 Update
