@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import EditUser from './EditUserPopUp';
 import { TailSpin } from 'react-loader-spinner';
 
- const Card = ({ user }) => {
+ const Card = ({ user, handleDelete }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -24,18 +24,6 @@ import { TailSpin } from 'react-loader-spinner';
 
     }, [])
 
-    const handleDelete = async (id) => {
-      try {
-        setLoading(true)
-        const res = await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);  // API call for deleting user
-        setLoading(false)
-        if(res.status === 200) {
-          toast.success('Successfully deleted user with ID ' + id)
-        }
-      } catch (err) {
-        toast.error('Error in deleting user! ' + err)
-      }
-    }
 
    return (
      <div ref={textRef} className="card-box rounded-xl anim opacity-0">

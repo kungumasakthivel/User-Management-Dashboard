@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import Card from './Card';
 import AddUser from './AddUserPopUp';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner';
 
 const ListUsers = () => {
@@ -29,8 +29,22 @@ const ListUsers = () => {
 
     fetchData();
   }, []);
-  console.log(data);
+  
 
+  const handleDelete = async (id) => {
+      try {
+        setLoading(true)
+        const res = await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);  // API call for deleting user
+        let filteredData = data.filter(user => user.id !== id)
+        setData(filteredData);
+        setLoading(false)
+        if(res.status === 200) {
+          toast.success('Successfully deleted user with ID ' + id)
+        }
+      } catch (err) {
+        toast.error('Error in deleting user! ' + err)
+      }
+    }
   if (loading) return (
     <div className='flex justify-center items-center h-full w-full'>
       <TailSpin height="40" width="40" color="red" />
@@ -43,7 +57,7 @@ const ListUsers = () => {
         <p className="font-bold text-3xl my-5 md:mb-10 heading-user-list">Users List</p>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-12'>
           {data.map(user => (
-            <Card key={user.id} user={user} />  // populating users using Card.jsx template
+            <Card key={user.id} user={user} handleDelete={handleDelete}/>  // populating users using Card.jsx template
           ))}
         </div>
         <button
