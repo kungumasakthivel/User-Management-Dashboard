@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { TailSpin } from "react-loader-spinner";
 import { toast } from 'react-toastify';
-import { validateEmail } from "./function/validateMail";
+import { validateEmail } from "./functions/validateMail";
 
 const AddUser = () => {
     const [name, setName] = useState('')

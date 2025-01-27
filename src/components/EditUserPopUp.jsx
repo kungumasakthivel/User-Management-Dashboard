@@ -3,7 +3,7 @@ import { useState } from "react"
 import { toast } from "react-toastify"
 import PropTypes from 'prop-types';
 import { TailSpin } from "react-loader-spinner";
-import { validateEmail } from "./function/validateMail";
+import { validateEmail } from "./functions/validateMail";
 
 const EditUser = ({ user }) => {
     const [name, setName] = useState(user.name)
