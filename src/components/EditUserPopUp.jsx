@@ -2,10 +2,13 @@ import axios from "axios"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import PropTypes from 'prop-types';
+import { TailSpin } from "react-loader-spinner";
+
 const EditUser = ({ user }) => {
     const [name, setName] = useState(user.name)
     const [email, setEmail] = useState(user.email)
     const [company, setCompany] = useState(user.company.name)
+    const [loading, setLoading] = useState(false);
 
     const validateEmail = (email) => {
         email = email.trim();
@@ -25,6 +28,7 @@ const EditUser = ({ user }) => {
             if(company.trim().length <= 0) {
                 return toast.error('Please enter your company!');
             }
+            setLoading(true);
             const updateData = {
                 name: name.trim(),
                 email: email.trim(),
@@ -32,6 +36,7 @@ const EditUser = ({ user }) => {
             }
 
             const res = await axios.patch(`https://jsonplaceholder.typicode.com/users/${id}`, updateData);
+            setLoading(false)
             console.log(res.data)
             if(res.status === 200 || res.status === 201) {
                 toast.success('User updated successfully!')        
@@ -43,6 +48,7 @@ const EditUser = ({ user }) => {
 
     return (
         <div className='flex flex-col items-center justify-center h-80'>
+            {loading ? <div className="loader" ><TailSpin height="25" width="35" color="red" /></div>: null}
             <h1 className="text-2xl font-semibold mb-3">EDIT USER</h1>
             <input 
              value={name}

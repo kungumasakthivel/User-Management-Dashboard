@@ -1,11 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
+import { TailSpin } from "react-loader-spinner";
 import { toast } from 'react-toastify';
 
 const AddUser = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [company, setCompany] = useState('')
+    const [loading, setLoading] = useState(false);
 
     const validateEmail = (email) => {
         email = email.trim();
@@ -24,6 +26,7 @@ const AddUser = () => {
         if(company.trim().length <= 0) {
             return toast.error('Please enter your company!');
         }
+        setLoading(true);
         const postData = {
             name: name.trim(),
             email: email.trim(),
@@ -31,6 +34,7 @@ const AddUser = () => {
         }
         try {
             const res = await axios.post('https://jsonplaceholder.typicode.com/users', postData);
+            setLoading(false)
             console.log(res)
             if(res.status === 200 || res.status === 201) {
                 toast.success('User added successfully!')
@@ -42,6 +46,7 @@ const AddUser = () => {
     }
   return (
     <div className='flex flex-col items-center justify-center h-80'>
+        {loading ? <div className="loader" ><TailSpin height="25" width="35" color="red" /></div>: null}
         <h1 className="text-2xl font-semibold mb-3">NEW USER</h1>
         <input 
          value={name}

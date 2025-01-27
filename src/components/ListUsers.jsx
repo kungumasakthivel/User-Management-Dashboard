@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import Card from './Card';
-import AddUser from './AddUser';
+import AddUser from './AddUserPopUp';
 import { ToastContainer } from 'react-toastify';
-
+import { TailSpin } from 'react-loader-spinner';
 
 const ListUsers = () => {
   const [data, setData] = useState(null);
@@ -31,12 +31,16 @@ const ListUsers = () => {
   }, []);
   console.log(data);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return (
+    <div className='flex justify-center items-center h-full w-full'>
+      <TailSpin height="40" width="40" color="red" />
+    </div>
+  );
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="flex flex-col justify-center items-center mb-5">
-        <p className="font-bold text-3xl my-5 md:mb-10">Users List</p>
+        <p className="font-bold text-3xl my-5 md:mb-10 heading-user-list">Users List</p>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-12'>
           {data.map(user => (
             <Card key={user.id} user={user} />
@@ -67,7 +71,7 @@ const ListUsers = () => {
           }}
         >
           <AddUser setIsOpen={isOpen}/>
-          <button className='cursor-pointer' onClick={() => setIsOpen(false)}>Close</button>
+          <button className='cursor-pointer hover:text-red-400' onClick={() => setIsOpen(false)}>Close</button>
         </Modal>
         <ToastContainer />
     </div>

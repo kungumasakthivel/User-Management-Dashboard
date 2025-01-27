@@ -26,6 +26,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.heading-user-list {
+  background: linear-gradient(135deg, #c285f8, white, snow, #c285f8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .card-box {
   min-width: 300px;
 }
@@ -103,6 +110,17 @@
   padding-left: 18px;
   padding-right: 18px;
   border-color: greenyellow;
+}
+
+.loader {
+  position: absolute;
+  left: 280px;
+  bottom: 350px;
+}
+
+.del-loader {
+  position: absolute;
+  left: 275px;
 }
 
 /* small screen  */
