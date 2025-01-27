@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { toast } from 'react-toastify';
 
-const AddUser = ({ setIsOpen }) => {
+const AddUser = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [company, setCompany] = useState('')
@@ -34,7 +34,7 @@ const AddUser = ({ setIsOpen }) => {
             console.log(res)
             if(res.status === 200 || res.status === 201) {
                 toast.success('User added successfully!')
-                setIsOpen(false)
+                
             }
         } catch (err) {
             toast.error('Error: ' + err)
