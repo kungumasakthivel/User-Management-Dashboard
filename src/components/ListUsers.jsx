@@ -7,11 +7,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner';
 
 const ListUsers = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const [isOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState(null);          // setting users data 
+  const [loading, setLoading] = useState(true);    // loading status for spinner
+  const [error, setError] = useState(null);        // error status
+  const [isOpen, setIsOpen] = useState(false);     // modal is open or close - add user popup
 
  Modal.setAppElement('#root');
 
@@ -19,11 +18,11 @@ const ListUsers = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-        setData(response.data);
+        setData(response.data);   // setting users data
       } catch (error) {
-        setError(error);
+        setError(error);          // setting error message
       } finally {
-        setLoading(false);
+        setLoading(false);        // setting loading status
       }
     };
 
@@ -39,10 +38,10 @@ const ListUsers = () => {
         setData(filteredData);
         setLoading(false)
         if(res.status === 200) {
-          toast.success('Successfully deleted user with ID ' + id)
+          toast.success('Successfully deleted user with ID ' + id)  // raising success notification
         }
       } catch (err) {
-        toast.error('Error in deleting user! ' + err)
+        toast.error('Error in deleting user! ' + err)               // raising error notification
       }
     }
   if (loading) return (

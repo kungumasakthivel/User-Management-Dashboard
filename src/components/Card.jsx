@@ -5,9 +5,9 @@ import Modal from 'react-modal';
 import EditUser from './EditUserPopUp';
 import { TailSpin } from 'react-loader-spinner';
 
- const Card = ({ user, handleDelete }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [loading, ] = useState(false);
+ const Card = ({ user, handleDelete }) => {       // handleDelete is delete api function from parent element
+    const [isOpen, setIsOpen] = useState(false);  // modal status for open popup or not
+    const [loading, ] = useState(false);          // loading status for delete api call
 
     const textRef = useRef(null);
     useEffect(() => {

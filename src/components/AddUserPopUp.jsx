@@ -5,26 +5,32 @@ import { toast } from 'react-toastify';
 import { validateEmail } from "./functions/validateMail";
 
 const AddUser = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [company, setCompany] = useState('')
-    const [loading, setLoading] = useState(false);
+    const [name, setName] = useState('')             // new user name
+    const [email, setEmail] = useState('')           // new user email
+    const [company, setCompany] = useState('')       // new user company
+    const [loading, setLoading] = useState(false);   // loading status for add user api call
 
     
 
     const handleSubmit = async () => {
-
+        // trim off the leading spaces from name and check for empty 
+        // value for clint-side validation
         if(name.trim().length <= 0) {
             return toast.error('Please enter your name!');
         }
+
+        // validateing the provided email
         if(validateEmail(email) !== true) {
             return toast.error('Please enter valid email');
         }
+
+        // trim off the leading spaces from company and check for empty 
+        // value for clint-side validation
         if(company.trim().length <= 0) {
             return toast.error('Please enter your company!');
         }
         setLoading(true);
-        const postData = {         // storing all user data in one object for post method
+        const postData = {            // storing all user data in one object for post method
             name: name.trim(),
             email: email.trim(),
             company: company.trim()
