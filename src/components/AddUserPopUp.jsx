@@ -5,21 +5,28 @@ import { toast } from 'react-toastify';
 import { validateEmail } from "./functions/validateMail";
 
 const AddUser = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [company, setCompany] = useState('')
-    const [loading, setLoading] = useState(false);
+    const [name, setName] = useState('')              // to store name value for new user
+    const [email, setEmail] = useState('')            // to store email value for new user
+    const [company, setCompany] = useState('')        // to store company value for new user
+    const [loading, setLoading] = useState(false);    // loading status for creating new user
 
     
 
     const handleSubmit = async () => {
-
+        
+        // trim off the leading spaces from name and check for empty 
+        // value for clint-side validation
         if(name.trim().length <= 0) {
             return toast.error('Please enter your name!');
         }
+
+        // validateing the provided email
         if(validateEmail(email) !== true) {
             return toast.error('Please enter valid email');
         }
+
+        // trim off the leading spaces and check for empty 
+        // value for clint-side validation 
         if(company.trim().length <= 0) {
             return toast.error('Please enter your company!');
         }
@@ -30,9 +37,9 @@ const AddUser = () => {
             company: company.trim()
         }
         try {
+            // making post request for adding new user
             const res = await axios.post('https://jsonplaceholder.typicode.com/users', postData);
             setLoading(false)
-            console.log(res)
             if(res.status === 200 || res.status === 201) {
                 toast.success('User added successfully!')   // calling success notification           
             }

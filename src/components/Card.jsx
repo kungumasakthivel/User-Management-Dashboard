@@ -8,8 +8,8 @@ import EditUser from './EditUserPopUp';
 import { TailSpin } from 'react-loader-spinner';
 
  const Card = ({ user }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);       // modal open status
+    const [loading, setLoading] = useState(false);     // loading status for delete api call
 
     const textRef = useRef(null);
     useEffect(() => {
@@ -27,13 +27,14 @@ import { TailSpin } from 'react-loader-spinner';
     const handleDelete = async (id) => {
       try {
         setLoading(true)
-        const res = await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);  // API call for deleting user
+        // making delete request to delete user with specific id
+        const res = await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`); 
         setLoading(false)
         if(res.status === 200) {
-          toast.success('Successfully deleted user with ID ' + id)
+          toast.success('Successfully deleted user with ID ' + id) // raising success notification 
         }
       } catch (err) {
-        toast.error('Error in deleting user! ' + err)
+        toast.error('Error in deleting user! ' + err) // raising error notification
       }
     }
 
@@ -64,7 +65,7 @@ import { TailSpin } from 'react-loader-spinner';
                 >
                   Edit
                 </button>
-                <Modal
+                <Modal // modal popup for editing user details
                   isOpen={isOpen}
                   onRequestClose={() => setIsOpen(false)}
                   style={{

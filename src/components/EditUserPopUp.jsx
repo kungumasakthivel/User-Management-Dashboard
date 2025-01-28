@@ -6,39 +6,50 @@ import { TailSpin } from "react-loader-spinner";
 import { validateEmail } from "./functions/validateMail";
 
 const EditUser = ({ user }) => {
-    const [name, setName] = useState(user.name)
-    const [email, setEmail] = useState(user.email)
-    const [company, setCompany] = useState(user.company.name)
-    const [loading, setLoading] = useState(false);
+    const [name, setName] = useState(user.name)                 // setting name from user object
+    const [email, setEmail] = useState(user.email)              // setting email from user object
+    const [company, setCompany] = useState(user.company.name)   // setting company.name from user object
+    const [loading, setLoading] = useState(false);              // loading status for edit api call
 
 
     const handleEdit = async ({ id }) => {
         console.log(id)
         try {
+
+            // trim off the leading spaces from name and check for empty 
+            // value for clint-side validation 
             if(name.trim().length <= 0) {
                 return toast.error('Please enter your name!');
             }
+
+            // validateing the provided email
             if(validateEmail(email) !== true) {
                 return toast.error('Please enter valid email');
             }
+
+            // trim off the leading spaces and check for empty 
+            // value for clint-side validation 
             if(company.trim().length <= 0) {
                 return toast.error('Please enter your company!');
             }
             setLoading(true);
+
+            // bundle the user details into object for making patch request
             const updateData = {
                 name: name.trim(),
                 email: email.trim(),
                 company: company.trim()
             }
 
+            // making patch request to update users details in server
             const res = await axios.patch(`https://jsonplaceholder.typicode.com/users/${id}`, updateData);
             setLoading(false)
             console.log(res.data)
             if(res.status === 200 || res.status === 201) {
-                toast.success('User updated successfully!')        
+                toast.success('User updated successfully!')  // raising success notification   
             }
         } catch (err) {
-            toast.error(err + ' in updating!')
+            toast.error(err + ' in updating!')  // raiseing error notification
         }
     }
 

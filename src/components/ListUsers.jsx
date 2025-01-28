@@ -7,19 +7,21 @@ import { ToastContainer } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner';
 
 const ListUsers = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const [isOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState(null);                // used to store user data from '/users' api
+  const [loading, setLoading] = useState(true);          // specifies status of loading animation
+  const [error, setError] = useState(null);              // used to store error value
+  const [isOpen, setIsOpen] = useState(false);           // specifies whether popup is open or closed
 
  Modal.setAppElement('#root');
 
+  // making API call to fetch users data
+  // and setting response user data in 'data' variable
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // fetching users
         const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-        setData(response.data);
+        setData(response.data);  // setting all users
       } catch (error) {
         setError(error);
       } finally {
@@ -31,6 +33,7 @@ const ListUsers = () => {
   }, []);
   console.log(data);
 
+  // initial loader for populating the users
   if (loading) return (
     <div className='flex justify-center items-center h-full w-full'>
       <TailSpin height="40" width="40" color="red" />
@@ -52,7 +55,7 @@ const ListUsers = () => {
         >
           Add
         </button>
-        <Modal  // model popup for adding new users
+        <Modal  // modal popup for adding new users
           isOpen={isOpen}
           onRequestClose={() => setIsOpen(false)}
           style={{
